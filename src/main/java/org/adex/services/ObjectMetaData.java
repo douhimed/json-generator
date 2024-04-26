@@ -37,8 +37,7 @@ public final class ObjectMetaData {
             case STRING -> StringUtils.generate(min, max, upperCase);
             case NUMBER -> NumberUtils.generate(min, max);
             case BOOLEAN -> BooleanUtils.GENERATE.get();
-            case ARRAY -> ArrayUtils.generate(min, max, getChildren().iterator().next());
-            case OBJECT -> null;
+            case ARRAY, OBJECT -> null;
         };
     }
 
