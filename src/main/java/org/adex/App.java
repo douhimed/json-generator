@@ -1,11 +1,10 @@
 package org.adex;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.adex.services.JsonGenerator;
-import org.adex.services.ObjectMetaData;
-import org.adex.services.ObjectType;
+import org.adex.inputs.ObjectMetaData;
+import org.adex.inputs.ObjectType;
 
 import java.lang.reflect.Field;
 import java.util.*;

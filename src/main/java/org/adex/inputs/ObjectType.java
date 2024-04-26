@@ -1,4 +1,4 @@
-package org.adex.services;
+package org.adex.inputs;
 
 public enum ObjectType {
     STRING, NUMBER, BOOLEAN, TEXT, OBJECT, ARRAY;

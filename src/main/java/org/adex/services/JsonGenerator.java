@@ -1,5 +1,7 @@
 package org.adex.services;
 
+import org.adex.inputs.ObjectMetaData;
+import org.adex.inputs.ObjectType;
 import org.adex.utils.RandomUtils;
 
 import java.util.*;

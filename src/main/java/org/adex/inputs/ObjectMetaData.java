@@ -1,4 +1,4 @@
-package org.adex.services;
+package org.adex.inputs;
 
 import lombok.Builder;
 import lombok.Getter;
