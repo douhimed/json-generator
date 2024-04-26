@@ -12,8 +12,7 @@ public final class ArrayUtils {
     }
 
     public static String generate(int min, int max, ObjectMetaData obj) {
-        final Object val = obj.generateValue();
-        return Collections.nCopies(RandomUtils.RANDOM_NUM.apply(min, max), val)
+        return Collections.nCopies(RandomUtils.RANDOM_NUM.apply(min, max), obj.generateValue())
                 .stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(",", "[", "]"));

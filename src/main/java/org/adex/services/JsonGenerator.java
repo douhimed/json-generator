@@ -15,8 +15,8 @@ public final class JsonGenerator {
     }
 
     private static void generate(ObjectMetaData obj, List<String> lines) {
-        if (obj.isLeaf()) {
-            lines.add(obj.getName() + ": " + obj.generateValue());
+        if (ObjectType.isLeaf(obj.getType())) {
+            lines.add(String.join(": ", obj.getName(), Objects.requireNonNull(obj.generateValue()).toString()));
         } else {
             List<String> childLines = new ArrayList<>();
             for (ObjectMetaData child : obj.getChildren()) {

@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.adex.utils.*;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 @Getter
@@ -33,24 +31,12 @@ public final class ObjectMetaData {
         return Objects.hashCode(name);
     }
 
-    public boolean isObject() {
-        return Optional.ofNullable(type)
-                .map(ObjectType::isObject)
-                .orElseThrow(() -> new IllegalStateException("Type must be defined"));
-    }
-
-    public boolean isLeaf() {
-        return Optional.ofNullable(type)
-                .map(ObjectType::isLeaf)
-                .orElseThrow(() -> new IllegalStateException("Type must be defined"));
-    }
-
     public Object generateValue() {
         return switch (type) {
             case TEXT -> TextUtils.generate(min, max, upperCase);
             case STRING -> StringUtils.generate(min, max, upperCase);
             case NUMBER -> NumberUtils.generate(min, max);
-            case BOOLEAN -> BooleanUtils.generate();
+            case BOOLEAN -> BooleanUtils.GENERATE.get();
             case ARRAY -> ArrayUtils.generate(min, max, getChildren().iterator().next());
             case OBJECT -> null;
         };

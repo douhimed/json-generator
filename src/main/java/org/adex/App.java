@@ -43,7 +43,7 @@ public class App {
                 .name("city")
                 .type(ObjectType.STRING)
                 .min(3)
-                .max(50)
+                .max(20)
                 .upperCase(true)
                 .build();
 
@@ -61,10 +61,15 @@ public class App {
                 .children(Set.of(city, zipCode))
                 .build();
 
+        final ObjectMetaData statusPerso = ObjectMetaData.builder()
+                .type(ObjectType.BOOLEAN)
+                .name("single")
+                .build();
+
         final ObjectMetaData person = ObjectMetaData.builder()
                 .name("person")
                 .type(ObjectType.OBJECT)
-                .children(Set.of(nom, prenom, childrenNumber, prenoms, address))
+                .children(Set.of(nom, prenom, childrenNumber, prenoms, address, statusPerso))
                 .build();
 
         System.out.println(JsonGenerator.generate(person));
