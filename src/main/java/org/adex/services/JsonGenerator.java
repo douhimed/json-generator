@@ -31,10 +31,11 @@ public final class JsonGenerator {
                 generate(child, childLines, !isArray);
             }
             if (isArray) {
-                lines.add(obj.getName() + ": " + Collections.nCopies(RandomUtils.RANDOM_NUM.apply(obj.getMin(), obj.getMin()), childLines.getFirst())
+                final String repeatedChildLine = Collections.nCopies(RandomUtils.RANDOM_NUM.apply(obj.getMin(), obj.getMin()), childLines.getFirst())
                         .stream()
                         .map(Object::toString)
-                        .collect(Collectors.joining(",", "[", "]")));
+                        .collect(Collectors.joining(",", "[", "]"));
+                lines.add(obj.getName() + ": " + repeatedChildLine);
             } else {
                 lines.add(obj.getName() +
                         ": {" +
