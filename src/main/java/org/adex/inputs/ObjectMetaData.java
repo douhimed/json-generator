@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.adex.utils.*;
 
+import java.lang.reflect.Type;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,4 +42,20 @@ public final class ObjectMetaData {
         };
     }
 
+    public String build(boolean addColumnName) {
+        String value = Objects.requireNonNull(generateValue()).toString();
+        if(isStringOrDate()) {
+            value = "\"" + value + "\"";
+        }
+
+        return addColumnName ? getName() + value : value;
+    }
+
+    public String getName() {
+        return "\"" + name + "\":";
+    }
+
+    private boolean isStringOrDate() {
+        return ObjectType.isDate(type) || ObjectType.isString(type);
+    }
 }

@@ -10,4 +10,13 @@ public enum ObjectType {
     public static boolean isArray(ObjectType type) {
         return ARRAY == type;
     }
+
+    public static boolean isDate(ObjectType type) {
+        return false;
+    }
+
+    public static boolean isString(ObjectType type) {
+        return STRING == type;
+
+    }
 }

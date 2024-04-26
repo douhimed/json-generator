@@ -5,7 +5,8 @@ import org.adex.inputs.ObjectType;
 import org.adex.utils.RandomUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static org.adex.utils.StringUtils.*;
 
 public final class JsonGenerator {
 
@@ -16,13 +17,12 @@ public final class JsonGenerator {
     public static String generate(ObjectMetaData obj) {
         List<String> lines = new ArrayList<>();
         generate(obj, lines, true);
-        return "{" + String.join(", ", lines) + "}";
+        return OPEN_CURLY_BRACKET + String.join(COMMA, lines) + CLOSE_CURLY_BRACKET;
     }
 
     private static void generate(ObjectMetaData obj, List<String> lines, boolean addColumnName) {
         if (ObjectType.isLeaf(obj.getType())) {
-            final String value = Objects.requireNonNull(obj.generateValue()).toString();
-            final String line = addColumnName ? obj.getName() + ": " + value : value;
+            final String line = obj.build(addColumnName);
             lines.add(line);
         } else {
             final boolean isArray = ObjectType.isArray(obj.getType());
@@ -31,16 +31,14 @@ public final class JsonGenerator {
                 generate(child, childLines, !isArray);
             }
             if (isArray) {
-                final String repeatedChildLine = Collections.nCopies(RandomUtils.RANDOM_NUM.apply(obj.getMin(), obj.getMin()), childLines.getFirst())
-                        .stream()
-                        .map(Object::toString)
-                        .collect(Collectors.joining(",", "[", "]"));
-                lines.add(obj.getName() + ": " + repeatedChildLine);
+                final Integer randomSize = RandomUtils.RANDOM_NUM.apply(obj.getMin(), obj.getMin());
+                final String repeatedChildLine = OPEN_BRACKET + String.join(COMMA, Collections.nCopies(randomSize, childLines.getFirst())) + CLOSE_BRACKET;
+                lines.add(obj.getName() + repeatedChildLine);
             } else {
-                lines.add(obj.getName() +
-                        ": {" +
-                            String.join(", ", childLines) +
-                        "}");
+                lines.add(new StringBuilder(obj.getName())
+                        .append(OPEN_CURLY_BRACKET)
+                        .append(String.join(COMMA, childLines))
+                        .append(CLOSE_CURLY_BRACKET).toString());
             }
         }
     }
