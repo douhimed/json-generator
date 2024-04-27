@@ -66,10 +66,18 @@ public class App {
                 .name("single")
                 .build();
 
+        final ObjectMetaData otherAddress = ObjectMetaData.builder()
+                .type(ObjectType.ARRAY)
+                .name("otherAddress")
+                .min(1)
+                .max(1)
+                .children(Set.of(address))
+                .build();
+
         final ObjectMetaData person = ObjectMetaData.builder()
                 .name("person")
                 .type(ObjectType.OBJECT)
-                .children(Set.of(nom, prenom, childrenNumber, prenoms, address, statusPerso))
+                .children(Set.of(nom, prenom, childrenNumber, prenoms, address, statusPerso, otherAddress))
                 .build();
 
         System.out.println(JsonGenerator.generate(person));
