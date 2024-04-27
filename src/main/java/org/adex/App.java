@@ -9,6 +9,7 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
 
+
         final ObjectMetaData nom = ObjectMetaData.builder()
                 .name("nom")
                 .type(ObjectType.STRING)

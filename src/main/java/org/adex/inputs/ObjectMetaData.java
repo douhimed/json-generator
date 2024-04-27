@@ -44,14 +44,14 @@ public final class ObjectMetaData {
     public String build(boolean addColumnName) {
         String value = Objects.requireNonNull(generateValue()).toString();
         if(isStringOrDate()) {
-            value = "\"" + value + "\"";
+            value = String.format("\"%s\"", value);
         }
 
         return addColumnName ? getName() + value : value;
     }
 
     public String getName() {
-        return "\"" + name + "\":";
+       return String.format("\"%s\"%s", name, StringUtils.COLON);
     }
 
     private boolean isStringOrDate() {

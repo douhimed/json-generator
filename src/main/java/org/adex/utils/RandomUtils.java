@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 public final class RandomUtils {
 
-    private static final Random RANDOM = new Random();
+    public static final Random RANDOM = new Random();
 
     public static final BiFunction<Integer, Integer, Integer> RANDOM_NUM = (min, max) -> min + RANDOM.nextInt(max - min + 1);
 

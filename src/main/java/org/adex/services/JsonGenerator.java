@@ -6,6 +6,7 @@ import org.adex.utils.RandomUtils;
 
 import java.util.*;
 
+import static org.adex.utils.CollectionUtils.*;
 import static org.adex.utils.StringUtils.*;
 
 public final class JsonGenerator {
@@ -17,7 +18,7 @@ public final class JsonGenerator {
     public static String generate(ObjectMetaData obj) {
         List<String> lines = new ArrayList<>();
         generate(obj, lines, true);
-        return OPEN_CURLY_BRACKET + String.join(COMMA, lines) + CLOSE_CURLY_BRACKET;
+        return join(lines, COMMA, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET);
     }
 
     private static void generate(ObjectMetaData obj, List<String> lines, boolean addColumnName) {
@@ -32,13 +33,12 @@ public final class JsonGenerator {
             }
             if (isArray) {
                 final Integer randomSize = RandomUtils.RANDOM_NUM.apply(obj.getMin(), obj.getMin());
-                final String repeatedChildLine = OPEN_BRACKET + String.join(COMMA, Collections.nCopies(randomSize, childLines.getFirst())) + CLOSE_BRACKET;
+                final List<String> elements = Collections.nCopies(randomSize, childLines.getFirst());
+                final String repeatedChildLine = join(elements, COMMA, OPEN_BRACKET, CLOSE_BRACKET);
                 lines.add(obj.getName() + repeatedChildLine);
             } else {
-                lines.add(new StringBuilder(addColumnName ? obj.getName() : EMPTY)
-                        .append(OPEN_CURLY_BRACKET)
-                        .append(String.join(COMMA, childLines))
-                        .append(CLOSE_CURLY_BRACKET).toString());
+                lines.add((addColumnName ? obj.getName() : EMPTY) +
+                        join(childLines, COMMA, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET));
             }
         }
     }
