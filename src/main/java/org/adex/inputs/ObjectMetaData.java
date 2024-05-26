@@ -17,6 +17,7 @@ public final class ObjectMetaData {
     private int min, max;
     private boolean upperCase;
     private Set<ObjectMetaData> children;
+    private Object defaultValue;
 
     @Override
     public boolean equals(Object o) {
@@ -32,6 +33,10 @@ public final class ObjectMetaData {
     }
 
     public Object generateValue() {
+        if (Objects.nonNull(defaultValue) && ObjectType.isLeaf(type)) {
+            return defaultValue;
+        }
+
         return switch (type) {
             case TEXT -> TextUtils.generate(min, max, upperCase);
             case STRING -> StringUtils.generate(min, max, upperCase);

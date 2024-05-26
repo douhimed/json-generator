@@ -5,8 +5,14 @@ import org.adex.inputs.ObjectMetaData;
 import org.adex.inputs.ObjectType;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App {
+
+
+    private static final Logger LOG = Logger.getLogger(App.class.getName());
+
     public static void main(String[] args) {
 
 
@@ -16,6 +22,7 @@ public class App {
                 .min(2)
                 .max(10)
                 .upperCase(true)
+                .defaultValue("med med")
                 .build();
 
         final ObjectMetaData prenom = ObjectMetaData.builder()
@@ -81,7 +88,7 @@ public class App {
                 .children(Set.of(nom, prenom, childrenNumber, prenoms, address, statusPerso, otherAddress))
                 .build();
 
-        System.out.println(JsonGenerator.generate(person));
+        LOG.log(Level.INFO, JsonGenerator.generate(person));
 
     }
 }
