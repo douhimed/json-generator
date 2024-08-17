@@ -32,7 +32,7 @@ public final class JsonGenerator {
                 generate(child, childLines, !isArray);
             }
             if (isArray) {
-                final Integer randomSize = RandomUtils.RANDOM_NUM.apply(obj.getMin(), obj.getMin());
+                final int randomSize = RandomUtils.RANDOM_NUM.applyAsInt(obj.getMin(), obj.getMin());
                 final List<String> elements = Collections.nCopies(randomSize, childLines.getFirst());
                 final String repeatedChildLine = join(elements, COMMA, OPEN_BRACKET, CLOSE_BRACKET);
                 lines.add(obj.getName() + repeatedChildLine);

@@ -11,7 +11,7 @@ public final class NumberUtils {
             throw new IllegalArgumentException("max must be greater than min");
         }
 
-        return RandomUtils.RANDOM_NUM.apply(min, max);
+        return RandomUtils.RANDOM_NUM.applyAsInt(min, max);
     }
 
     public static Number generate() {

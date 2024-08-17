@@ -1,7 +1,7 @@
 package org.adex.inputs;
 
 public enum ObjectType {
-    STRING, NUMBER, BOOLEAN, TEXT, OBJECT, ARRAY;
+    STRING, NUMBER, BOOLEAN, TEXT, OBJECT, ARRAY, DATE;
 
     public static boolean isLeaf(ObjectType type) {
         return OBJECT != type && ARRAY != type;
@@ -12,7 +12,7 @@ public enum ObjectType {
     }
 
     public static boolean isDate(ObjectType type) {
-        return false;
+        return type == DATE;
     }
 
     public static boolean isString(ObjectType type) {

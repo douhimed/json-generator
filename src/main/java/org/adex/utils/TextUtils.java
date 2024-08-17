@@ -22,12 +22,12 @@ public final class TextUtils {
             throw new IllegalArgumentException("Max must be greater than or equal to two");
 
         return IntStream.range(0, Math.min(max, LOREM_WORDS.length))
-                .mapToObj(i -> LOREM_WORDS[RandomUtils.RANDOM_NUM.apply(0, LOREM_WORDS.length - 1)].stripIndent())
+                .mapToObj(i -> LOREM_WORDS[RandomUtils.RANDOM_NUM.applyAsInt(0, LOREM_WORDS.length - 1)].stripIndent())
                 .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     public static String generate(int min, int max, boolean upperCase) {
-        final String text = generate(max, max);
+        final String text = generate(min, max);
         return upperCase ? text.toUpperCase() : text;
     }
 

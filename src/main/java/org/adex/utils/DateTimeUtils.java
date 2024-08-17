@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 
 public final class DateTimeUtils {
 
-    public static final Supplier<LocalDate> GET_PAST_DATE = () -> LocalDate.now().minusDays(RandomUtils.RANDOM.nextInt(365) + 1);
-    public static final Supplier<LocalDate> GET_FUTURE_DATE = () -> LocalDate.now().plusDays(RandomUtils.RANDOM.nextInt(365) + 1);
+    public static final Supplier<LocalDate> GET_PAST_DATE = () -> LocalDate.now().minusDays(RandomUtils.RANDOM.nextInt(365) + 1L);
+    public static final Supplier<LocalDate> GET_FUTURE_DATE = () -> LocalDate.now().plusDays(RandomUtils.RANDOM.nextInt(365) + 1L);
 
     private DateTimeUtils() {
         throw new IllegalStateException("Utility class");

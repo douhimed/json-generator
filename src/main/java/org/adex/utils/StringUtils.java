@@ -33,8 +33,8 @@ public final class StringUtils {
         if (min > max || min < 0)
             throw new IllegalArgumentException("Min and Max must be greater than or equal to zero");
 
-        return IntStream.range(0, RandomUtils.RANDOM_NUM.apply(min, max))
-                .mapToObj($ -> RANDOM_CHAR.get())
+        return IntStream.range(0, RandomUtils.RANDOM_NUM.applyAsInt(min, max))
+                .mapToObj(a -> RANDOM_CHAR.get())
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();
     }

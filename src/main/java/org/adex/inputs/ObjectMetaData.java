@@ -14,7 +14,8 @@ import java.util.Set;
 public final class ObjectMetaData {
     private String name;
     private ObjectType type;
-    private int min, max;
+    private int min;
+    private int max;
     private boolean upperCase;
     private Set<ObjectMetaData> children;
     private Object defaultValue;
@@ -41,8 +42,8 @@ public final class ObjectMetaData {
             case TEXT -> TextUtils.generate(min, max, upperCase);
             case STRING -> StringUtils.generate(min, max, upperCase);
             case NUMBER -> NumberUtils.generate(min, max);
-            case BOOLEAN -> BooleanUtils.GENERATE.get();
-            case ARRAY, OBJECT -> null;
+            case BOOLEAN -> BooleanUtils.GENERATE.getAsBoolean();
+            case ARRAY, OBJECT, DATE -> null;
         };
     }
 
